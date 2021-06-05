@@ -1,0 +1,19 @@
+.image-detail {}
+
+.image-detail .image-picture {}
+
+.image-detail .image-author {
+    border-radius: 50%;
+}
+
+.image-detail .about__picture {}
+
+.image-detail .about__picture h3 {}
+
+.image-detail .about__picture p {}
+
+.image-detail .about__author {}
+
+.image-detail .about__author h3 {}
+
+.image-detail .about__author p {}
