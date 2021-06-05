@@ -73,6 +73,7 @@ const drawPictures = () => {
         div.setAttribute('data-id', item.id)
         div.innerHTML = `
         <img src="${item.imageName}" alt="" />
+        <div class="image-desc">${item.pictureName}</div>
         <p class="author" title="${item.authorName}">${item.authorName}</p>
     `
         columns[i % columnsLength].append(div)
@@ -84,6 +85,7 @@ const drawPictures = () => {
 }
 
 const loadImages = () => {
+    images.length = 0
     $('body').append(loadingBlock)
     $.ajax({
         url: 'php/requests.php',
@@ -92,16 +94,19 @@ const loadImages = () => {
             "requestsType": "selectPictures"
         },
         success: (data) => {
+            console.log(images);
             data = JSON.parse(data);
             data.map((item, i) => {
                 images.push({
                     id: parseInt(item['pictureID']),
+                    pictureName: item['pictureName'],
                     imageName: "assets/images/pictures/" + item['pictureURL'],
                     authorName: item['userFullName']
                 })
             })
             drawPictures()
             $('.loading__wrapper').remove()
+            console.log(images);
         }
     })
 }

@@ -1,7 +1,7 @@
 <?php
     date_default_timezone_set("Europe/Moscow");
     $host = 'localhost:8889'; 
-    $database = 'DiplomPasha';
+    $database = 'PashaDiplom';
     $user = 'root'; 
     $password = 'root'; 
 
