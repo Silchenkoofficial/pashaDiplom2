@@ -3,7 +3,8 @@
 .image-detail .image-picture {}
 
 .image-detail .image-author {
-    border-radius: 50%;
+    height: 100%;
+    border-radius: 20px;
 }
 
 .image-detail .about__picture {}

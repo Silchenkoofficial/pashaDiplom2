@@ -27,6 +27,7 @@ img {
 .btn-primary {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
+    transition: all 0.2s;
 }
 
 .btn-primary:hover {
@@ -38,12 +39,29 @@ img {
 .btn-outline-primary {
     color: var(--primary-color);
     border-color: var(--primary-color);
+    transition: all 0.2s;
 }
 
 .btn-outline-primary:hover {
     color: #fff;
     background-color: var(--primary-color);
     border-color: var(--primary-color);
+}
+.btn-check:focus+.btn-primary, .btn-primary:focus {
+    color: #fff;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(var(--primary-color), 0.5);
+}
+.btn-check:active+.btn-primary, .btn-check:checked+.btn-primary, .btn-primary.active, .btn-primary:active, .show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: scale(0.98);
+}
+.btn-check:active+.btn-primary:focus, .btn-check:checked+.btn-primary:focus, .btn-primary.active:focus, .btn-primary:active:focus, .show>.btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.25rem rgba(var(--primary-color), 0.5);
+    transform: scale(0.98);
 }
 
 .btn-check:active+.btn-outline-primary,
@@ -54,6 +72,10 @@ img {
     color: #fff;
     background-color: var(--primary-color);
     border-color: var(--primary-color);
+    transform: scale(0.98);
+}
+.btn-check:active+.btn-outline-primary:focus, .btn-check:checked+.btn-outline-primary:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus, .btn-outline-primary:active:focus {
+    box-shadow: 0 0 0 0.25rem rgba(var(--primary-color), 0.5);
 }
 
 .btn-secondary {
@@ -83,8 +105,10 @@ img {
     color: #fff;
     background-color: var(--secondary-color);
     border-color: var(--secondary-color);
+    transform: scale(0.98);
 }
 
+/* Стили для авторских работ */
 .works {
     padding: 20px 0;
     background-color: #fff;
@@ -124,6 +148,9 @@ img {
 .works .works__grid .works__grid--item:hover img {
     transform: scale(1.2);
 }
+.works .works__grid .works__grid--item:hover .image-desc {
+    opacity: 1;
+}
 
 .works .works__grid .works__grid--item .author {
     max-width: 90%;
@@ -138,4 +165,19 @@ img {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+.works .works__grid .works__grid--item .image-desc {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    opacity: 0;
+    transition: all 0.2s;
+    pointer-events: none;
 }

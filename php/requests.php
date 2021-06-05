@@ -11,6 +11,7 @@
                     `users`.`nameUser`,
                     `users`.`lastnameUser`,
                     `pictures`.`photoP`,
+                    `pictures`.`nameP`,
                     `pictures`.`pictureID`
                 FROM
                     `users`, `pictures`, `artists`
@@ -22,6 +23,7 @@
                 array_push($data, [
                     "pictureID" => $result['pictureID'],
                     "userFullName" => "$result[nameUser] $result[lastnameUser]",
+                    "pictureName" => $result['nameP'],
                     "pictureURL" => $result['photoP']
                 ]);
             }
