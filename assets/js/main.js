@@ -106,6 +106,7 @@ const loadImages = () => {
             })
             drawPictures()
             $('.loading__wrapper').remove()
+            console.log(images);
         }
     })
 }
