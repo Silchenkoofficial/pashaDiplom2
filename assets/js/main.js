@@ -119,6 +119,6 @@ $(document).ready(() => {
 
     $(document).on('click', '.works__grid--item', (e) => {
         localStorage.setItem("imageID", $(e.target).attr('data-id'))
-        location.href = 'imageDetail.html';
+        location.href = 'imageDetail.php';
     })
 });

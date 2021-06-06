@@ -20,7 +20,11 @@
     <!-- STYLES -->
     <link rel="stylesheet" href="libs/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/imageDetail.css">
+
+    <!-- SCRIPTS -->
+    <script src="libs/bootstrap/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 </head>
 
@@ -30,7 +34,7 @@
         <header class="header">
             <nav class="navbar sticky-top navbar-expand-lg navbar-light">
                 <div class="container">
-                    <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <a class="navbar-brand d-flex align-items-center" href="index.php">
                         <img src="assets/images/logo.png" alt="Logo">
                         <span style='font-family: "Caveat", sans-serif; font-size: 32px;' class='ms-1'>ArtStore</span>
                     </a>
@@ -67,44 +71,3 @@
             </nav>
         </header>
     </div>
-
-    <section class="image-detail">
-        <div class="container my-3">
-            <div class="row">
-                <div class="col-sm-4">
-                    <img class="image-picture" id="pictureURL" src="assets/images/empty.png" alt="picture">
-                </div>
-                <div class="col">
-                    <div class="about__picture">
-                        <h3 id="pictureName"></h3>
-                        <p id="pictureDescribe"></p>
-                        <hr class="dropdown-divider">
-                        <p id="pictureType"></p>
-                        <p id="pictureStyle"></p>
-                        <button type="button" name="" id="" class="btn btn-primary btn-lg btn-block">Проголосовать за картину</button>
-                    </div>
-                </div>
-            </div>
-            <hr class="dropdown-divider">
-            <div class="row">
-                <div class="col-sm-4">
-                    <img class="image-author" id="authorURL" src="assets/images/empty.png" alt="">
-                </div>
-                <div class="col">
-                    <div class="about__author">
-                        <h3 id="authorName"></h3>
-                        <p id="authorCity"></p>
-                        <p id="authorDescribe"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <script src="libs/bootstrap/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="assets/js/imageDetail.js"></script>
-</body>
-
-</html>
