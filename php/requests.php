@@ -50,42 +50,78 @@
             break;
         
         case "auth": // Запрос на авторизацию пользователь
-            $query = mysqli_query($link, "SELECT `userID`, `login`, `password` FROM users WHERE `login`='$_POST[userLogin]' AND `password`='$_POST[userPassword]'");
+            $query = mysqli_query($link, "SELECT `userID`, `login`, `password`, `ifArtist` FROM users WHERE `login`='$_POST[userLogin]' AND `password`='$_POST[userPassword]'");
             break;
 
         case "getUser": //
-            $query = mysqli_query($link, "
-                SELECT
-                    `users`.`userID`,
-                    `users`.`login`,
-                    `users`.`password`,
-                    `users`.`nameUser`,
-                    `users`.`surnameUser`,
-                    `users`.`lastnameUser`,
-                    `users`.`email`,
-                    `users`.`photoUser`,
-                    `users`.`ifArtist`,
-                    `artists`.`city`,
-                    `artists`.`describeArtist`
-                FROM 
-                    `users`, `artists`
-                WHERE
-                    `users`.`userID` = $_COOKIE[userID] AND
-                    `artists`.`userID` = `users`.`userID`
-            ");
+            $query = mysqli_query($link, "SELECT `users`.`ifArtist` FROM `users` WHERE `users`.`userID` = $_COOKIE[userID]");
+            $result = mysqli_fetch_array($query);
+            if ($_COOKIE['ifArtist'] == '1') {
+                $query = mysqli_query($link, "
+                    SELECT
+                        `users`.`userID`,
+                        `users`.`login`,
+                        `users`.`password`,
+                        `users`.`nameUser`,
+                        `users`.`surnameUser`,
+                        `users`.`lastnameUser`,
+                        `users`.`email`,
+                        `users`.`photoUser`,
+                        `users`.`ifArtist`,
+                        `artists`.`city`,
+                        `artists`.`describeArtist`
+                    FROM 
+                        `users`, `artists`
+                    WHERE
+                        `users`.`userID` = $_COOKIE[userID] AND
+                        `artists`.`userID` = `users`.`userID`
+                ");
+            } else {
+                $query = mysqli_query($link, "
+                    SELECT
+                        `users`.`userID`,
+                        `users`.`login`,
+                        `users`.`password`,
+                        `users`.`nameUser`,
+                        `users`.`surnameUser`,
+                        `users`.`lastnameUser`,
+                        `users`.`email`,
+                        `users`.`photoUser`,
+                        `users`.`ifArtist`
+                    FROM 
+                        `users`
+                    WHERE
+                        `users`.`userID` = $_COOKIE[userID]
+                ");
+            }
             break;
 
-        case: // Изменение данные о пользователе
-            $query = mysqli_query($link, "
+        case "changeUserData": // Изменение данные о пользователе
+            $userData = $_POST['userNewData'];
+            $queryText = "
                 UPDATE `users`
                 SET
-                    
-                WHERE `userID`=$_COOKIE[userID]
-            ")
+                    `nameUser` = '$userData[name]',
+                    `surnameUser` = '$userData[surname]',
+                    `lastnameUser` = '$userData[lastname]',
+                    `email` = '$userData[email]'
+                WHERE userID=$_COOKIE[userID]
+            ";
+            $query = mysqli_query($link, $queryText);
+            if ($_COOKIE['ifArtist'] == '1' && $query) {
+                $queryText = "
+                    UPDATE `artists`
+                    SET
+                        `city` = '$userData[city]',
+                        `describeArtist` = '$userData[describe]'
+                    WHERE userID=$_COOKIE[userID]
+                ";
+                $query = mysqli_query($link, $queryText);
+            }
             break;
         
         default:
-            echo json_encode(['Нет ответа'], JSON_UNESCAPED_UNICODE);
+            echo json_encode([false], JSON_UNESCAPED_UNICODE);
             break;
     }
 

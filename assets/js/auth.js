@@ -66,9 +66,10 @@ const authCheck = (userLogin, userPassword) => {
         },
         success: (data) => {
             data = JSON.parse(data)[0];
-            if (data['userID'] !== undefined) {
+            if (data && data['userID']) {
                 document.cookie = `userID=${data['userID']}`;
                 document.cookie = `auth=1`;
+                document.cookie = `ifArtist=${data['ifArtist']}`;
                 location.href = 'index.php';
             } else {
                 $('#error-auth').text('Упс... Неправильный логин или пароль')
