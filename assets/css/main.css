@@ -12,7 +12,9 @@
 }
 
 body {
+    position: relative;
     min-height: 100vh;
+    padding-bottom: 215px;
 }
 
 img {
@@ -102,4 +104,22 @@ img {
     opacity: 0;
     transition: all 0.2s;
     pointer-events: none;
+}
+
+.carousel-item img {
+    object-fit: cover;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(0deg, rgba(164, 91, 189, 0.1), rgba(164, 91, 189, 0.1)), linear-gradient(268.41deg, rgba(255, 126, 8, 0.25) 0%, rgba(164, 91, 189, 0.1) 100%);
+    color: #7B0994;
+    font-size: 18px;
+}
+.footer .social a {
+    color: inherit;
+    font-style: italic;
 }

@@ -53,6 +53,10 @@
             $query = mysqli_query($link, "SELECT `userID`, `login`, `password`, `ifArtist` FROM users WHERE `login`='$_POST[userLogin]' AND `password`='$_POST[userPassword]'");
             break;
 
+        case "reg": // Запрос на авторизацию пользователь
+            $query = mysqli_query($link, "SELECT `userID`, `login`FROM users WHERE `login`='$_POST[userLogin]'");
+            break;
+
         case "getUser": //
             $query = mysqli_query($link, "SELECT `users`.`ifArtist` FROM `users` WHERE `users`.`userID` = $_COOKIE[userID]");
             $result = mysqli_fetch_array($query);
@@ -110,14 +114,33 @@
             $query = mysqli_query($link, $queryText);
             if ($_COOKIE['ifArtist'] == '1' && $query) {
                 $queryText = "
-                    UPDATE `artists`
-                    SET
+                    INSERT INTO `artists`
+                    VALUES (
+                        NULL,
+                        `userID` = '$_COOKIE[userID]',
                         `city` = '$userData[city]',
                         `describeArtist` = '$userData[describe]'
-                    WHERE userID=$_COOKIE[userID]
+                    )
                 ";
                 $query = mysqli_query($link, $queryText);
             }
+            break;
+        
+        case "newUser": // Запрос на добавление нового пользователя
+            $userData = $_POST['userNewData'];
+            $query = mysqli_query($link, "
+                INSERT INTO `users` VALUES (
+                    NULL,
+                    '$userData[login]',
+                    '$userData[password]',
+                    '$userData[name]',
+                    '$userData[surname]',
+                    '$userData[lastname]',
+                    '$userData[email]',
+                    '$userData[photoUser]',
+                    0
+                )
+            ");
             break;
         
         default:
@@ -132,9 +155,7 @@
             }
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
         } else {
-            echo json_encode([
-                "data" => null
-            ], JSON_UNESCAPED_UNICODE);
+            echo json_encode([false], JSON_UNESCAPED_UNICODE);
         }
         exit();
     }

@@ -23,7 +23,7 @@
                         <button type="button" class="btn btn-secondary btn-lg auth-btn">Войти</button>
                     </div>
                     <div class="col d-grid">
-                        <button type="button" class="btn btn-secondary btn-lg">Регистрация</button>
+                        <button type="button" class="btn btn-secondary btn-lg" onclick="location.href = 'reg.php';">Регистрация</button>
                     </div>
                 </div>
             </form>

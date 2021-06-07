@@ -8,22 +8,22 @@
             <button type="button" data-bs-target="#top-slider" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#top-slider" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-        <div class="carousel-inner">
+        <div class="carousel-inner" style='height: 300px; color: #000; background-color: #f8d6d0;'>
             <div class="carousel-item active">
-                <div style='height: 300px; color: #fff;'
-                    class="d-flex align-items-center justify-content-center bg-dark">
-                    <h1>SLIDE 1</h1>
+                <div
+                    class="d-flex align-items-center justify-content-center">
+                    <img src="assets/images/slider/slide1.png" alt="">
                 </div>
             </div>
             <div class="carousel-item">
-                <div style='height: 300px; color: #fff;'
-                    class="d-flex align-items-center justify-content-center bg-dark">
+            <div
+                    class="">
                     <h1>SLIDE 2</h1>
                 </div>
             </div>
             <div class="carousel-item">
-                <div style='height: 300px; color: #fff;'
-                    class="d-flex align-items-center justify-content-center bg-dark">
+                <div
+                    class="">
                     <h1>SLIDE 3</h1>
                 </div>
             </div>

@@ -50,11 +50,11 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label">Из какого вы города?</label>
-                        <input type="email" class="form-control" placeholder="Например, Санкт-Петербург" id="inputCity">
+                        <input type="email" class="form-control" placeholder="Например, Санкт-Петербург" id="cityUser">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">О себе</label>
-                        <textarea class="form-control" placeholder="Расскажите о себе" rows="6" id="inputDescribe" style="resize: none;"></textarea>
+                        <textarea class="form-control" placeholder="Расскажите о себе" rows="6" id="describeUser" style="resize: none;"></textarea>
                     </div>
                 </div>
             </form>
