@@ -54,39 +54,44 @@ const loadingBlock = `
     </div>
 `;
 
-const loadPage = (data) => {
-    console.log(data);
-    $('#pictureName').text(data['nameP'])
-    $('#pictureDescribe').text(data['describeP'])
-    $('#pictureURL').attr('src', `assets/images/pictures/${data['photoP']}`)
-    $('#authorName').text(`${data['nameUser']} ${data['lastnameUser']}`)
-    $('#authorCity').text(data['city'])
-    $('#authorDescribe').text(data['describeArtist'])
-    $('#authorURL').attr('src', `assets/images/artists/${data['photoUser']}`)
-    $('#pictureType').html(`<b>Тип картины: </b>${data['nameType']}`)
-    $('#pictureStyle').html(`<b>Стиль картины: </b>${data['nameStyle']}`)
-    $('.loading__wrapper').remove()
-}
-
-$(document).ready(() => {
-    $('body').append(loadingBlock)
+const authCheck = (userLogin, userPassword) => {
     $.ajax({
         url: 'php/requests.php',
         type: "POST",
         data: {
-            "imageID": localStorage.getItem("imageID"),
-            "requestsType": "selectPictureOnID",
-            "queryType": "SELECT"
+            "requestsType": "auth",
+            "queryType": "SELECT",
+            "userLogin": `${userLogin}`,
+            "userPassword": `${userPassword}`
         },
         success: (data) => {
-            data = JSON.parse(data)[0]
-            loadPage(data)
+            data = JSON.parse(data)[0];
+            if (data['userID'] !== undefined) {
+                document.cookie = `userID=${data['userID']}`;
+                document.cookie = `auth=1`;
+                location.href = 'index.php';
+            } else {
+                $('#error-auth').text('Упс... Неправильный логин или пароль')
+            }
+        },
+        error: (e) => {
+            console.log(e);
         }
     })
+}
 
-    $('#voteBtn').click((e) => {
-        e.preventDefault();
+$(document).ready(() => {
+    $('.auth-btn').click(() => {
+        $('body').append(loadingBlock)
+        let login = $('#userLogin').val();
+        let password = $('#userPassword').val();
 
+        if (login != '' && password != '') {
+            authCheck(login, password);
+        } else {
+            $('#error-auth').text('Введите данные!')
+        }
+        $('.loading__wrapper').remove()
     })
 
 })

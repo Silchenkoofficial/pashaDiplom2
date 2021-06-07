@@ -13,8 +13,11 @@
                     <hr class="dropdown-divider">
                     <p id="pictureType"></p>
                     <p id="pictureStyle"></p>
-                    <button type="button" name="" id="" class="btn btn-primary btn-lg btn-block">Проголосовать за
-                        картину</button>
+                    <div class="row">
+                        <div class="d-grid col-lg-6">
+                            <button type="button" id='voteBtn' class="btn btn-primary btn-block">Проголосовать за картину</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

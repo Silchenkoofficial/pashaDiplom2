@@ -35,7 +35,7 @@
             <nav class="navbar sticky-top navbar-expand-lg navbar-light">
                 <div class="container">
                     <a class="navbar-brand d-flex align-items-center" href="index.php">
-                        <img src="assets/images/logo.png" alt="Logo">
+                        <img style="width: 60px; height: 60px" src="assets/images/logo.png" alt="Logo">
                         <span style='font-family: "Caveat", sans-serif; font-size: 32px;' class='ms-1'>ArtStore</span>
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -60,9 +60,18 @@
                             </li>
                         </ul>
                         <form class="d-flex">
-                            <button class="btn btn-outline-primary me-2" type="submit"><i class="fas fa-user"></i> Войти
-                                в
-                                систему</button>
+                            <?php if($_COOKIE['auth'] == '1') { ?>
+                            <a href='lk.php' class="btn btn-outline-primary me-2" type="submit">
+                                <i class="fas fa-user"></i>
+                                Личный кабинет
+                            </a>
+                            <?php } else { ?>
+
+                            <a href='auth.php' class="btn btn-outline-primary me-2" type="submit">
+                                <i class="fas fa-user"></i>
+                                Войти в систему
+                            </a>
+                            <?php } ?>
                             <button class="btn btn-primary" type="submit"><i class="fas fa-plus"></i> Добавить
                                 работу</button>
                         </form>

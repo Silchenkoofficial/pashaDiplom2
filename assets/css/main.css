@@ -1,3 +1,5 @@
+@import "./resetBootstrap.css";
+
 :root {
     --primary-color: #7B0994;
     --secondary-color: #DA4F4C;
@@ -22,90 +24,6 @@ img {
 
 .top {
     background: linear-gradient(261.21deg, rgba(164, 91, 189, 0.1) 0%, rgba(255, 126, 8, 0.25) 100%), rgba(164, 91, 189, 0.1);
-}
-
-.btn-primary {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    transition: all 0.2s;
-}
-
-.btn-primary:hover {
-    color: var(--primary-color);
-    background-color: transparent;
-    border-color: var(--primary-color);
-}
-
-.btn-outline-primary {
-    color: var(--primary-color);
-    border-color: var(--primary-color);
-    transition: all 0.2s;
-}
-
-.btn-outline-primary:hover {
-    color: #fff;
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-}
-.btn-check:focus+.btn-primary, .btn-primary:focus {
-    color: #fff;
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.25rem rgba(var(--primary-color), 0.5);
-}
-.btn-check:active+.btn-primary, .btn-check:checked+.btn-primary, .btn-primary.active, .btn-primary:active, .show>.btn-primary.dropdown-toggle {
-    color: #fff;
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    transform: scale(0.98);
-}
-.btn-check:active+.btn-primary:focus, .btn-check:checked+.btn-primary:focus, .btn-primary.active:focus, .btn-primary:active:focus, .show>.btn-primary.dropdown-toggle:focus {
-    box-shadow: 0 0 0 0.25rem rgba(var(--primary-color), 0.5);
-    transform: scale(0.98);
-}
-
-.btn-check:active+.btn-outline-primary,
-.btn-check:checked+.btn-outline-primary,
-.btn-outline-primary.active,
-.btn-outline-primary.dropdown-toggle.show,
-.btn-outline-primary:active {
-    color: #fff;
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    transform: scale(0.98);
-}
-.btn-check:active+.btn-outline-primary:focus, .btn-check:checked+.btn-outline-primary:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus, .btn-outline-primary:active:focus {
-    box-shadow: 0 0 0 0.25rem rgba(var(--primary-color), 0.5);
-}
-
-.btn-secondary {
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
-}
-
-.btn-check:focus+.btn-secondary,
-.btn-secondary:focus {
-    color: #fff;
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
-    box-shadow: 0 0 0 0.25rem rgb(130 138 145 / 50%);
-}
-
-.btn-secondary:hover {
-    color: #fff;
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
-}
-
-.btn-check:active+.btn-secondary,
-.btn-check:checked+.btn-secondary,
-.btn-secondary.active,
-.btn-secondary:active,
-.show>.btn-secondary.dropdown-toggle {
-    color: #fff;
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
-    transform: scale(0.98);
 }
 
 /* Стили для авторских работ */
@@ -148,6 +66,7 @@ img {
 .works .works__grid .works__grid--item:hover img {
     transform: scale(1.2);
 }
+
 .works .works__grid .works__grid--item:hover .image-desc {
     opacity: 1;
 }
@@ -166,7 +85,10 @@ img {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
 .works .works__grid .works__grid--item .image-desc {
+    text-align: center;
+    padding: 20px;
     position: absolute;
     top: 0;
     right: 0;

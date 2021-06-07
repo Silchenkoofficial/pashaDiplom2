@@ -1,4 +1,5 @@
 const images = []
+
 const loadingBlock = `
     <style>
         .loading__wrapper {
@@ -91,18 +92,21 @@ const loadImages = () => {
         url: 'php/requests.php',
         type: "POST",
         data: {
-            "requestsType": "selectPictures"
+            "requestsType": "selectPictures",
+            "queryType": "SELECT"
         },
         success: (data) => {
-            console.log(images);
             data = JSON.parse(data);
-            data.map((item, i) => {
-                images.push({
-                    id: parseInt(item['pictureID']),
-                    pictureName: item['pictureName'],
-                    imageName: "assets/images/pictures/" + item['pictureURL'],
-                    authorName: item['userFullName']
-                })
+            console.log(data);
+            data.map((obj, i) => {
+                for (let item in obj) {
+                    images[i] = {
+                        id: parseInt(obj['pictureID']),
+                        pictureName: obj['nameP'],
+                        imageName: "assets/images/pictures/" + obj['photoP'],
+                        authorName: `${obj['nameUser']} ${obj['lastnameUser']}`
+                    }
+                }
             })
             drawPictures()
             $('.loading__wrapper').remove()
