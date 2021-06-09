@@ -25,6 +25,7 @@
     <script src="libs/bootstrap/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="assets/js/header.js" type="module"></script>
 
 </head>
 
@@ -92,8 +93,27 @@
                     <h5 class="modal-title" id="exampleModalLabel">Добавление картины</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body"></div>
-                <div class="modal-footer">
+                <div class="modal-body" id="modalAddPictureBody">
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="photoUser" class="form-label">Загрузите картину</label>
+                                <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+                                <input class="form-control form-control-sm" id="photoUser" type="file">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Название картины</label>
+                                <input type="email" class="form-control" placeholder="Введите название картины"
+                                    aria-label="Введите название картины" id="pictureName">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">О картине</label>
+                                <textarea class="form-control" placeholder="Расскажите о картине" rows="6" id="describeUser" style="resize: none;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" id="modalAddPictureFooter">
                     <button type="button" class="btn btn-primary">Добавить картину</button>
                 </div>
             </div>

@@ -66,7 +66,7 @@
         case "getUser": //
             $query = mysqli_query($link, "SELECT `users`.`ifArtist` FROM `users` WHERE `users`.`userID` = $_COOKIE[userID]");
             $result = mysqli_fetch_array($query);
-            if ($_COOKIE['ifArtist'] == '1') {
+            if ($result['ifArtist'] == '1') {
                 $query = mysqli_query($link, "
                     SELECT
                         `users`.`userID`,
@@ -152,13 +152,14 @@
             $query = mysqli_query($link, "
                 INSERT INTO `artists` VALUES (
                     NULL,
-                    '$userData[userID]',
+                    '$_COOKIE[userID]',
                     '$userData[city]',
-                    '$userData[describe]'
+                    '$userData[describe]',
+                    0
                 )
             ");
             if ($query) {
-                $query = mysqli_query($link, "UPDATE `users` SET `ifArtist` = 1 WHERE `userID`=$userData[userID]");
+                $query = mysqli_query($link, "UPDATE `users` SET `ifArtist` = TRUE WHERE `userID`='$_COOKIE[userID]'");
             }
             break;
         

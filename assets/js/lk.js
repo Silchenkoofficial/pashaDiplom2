@@ -32,6 +32,7 @@ const loadUserData = () => {
         },
         success: (data) => {
             data = JSON.parse(data)[0]
+            document.cookie = `ifArtist=${data['ifArtist']}`;
             loadPage(data);
         }
     });
@@ -99,7 +100,6 @@ $(document).ready(() => {
                 console.log(data)
                 if (data) {
                     alert("Успешно");
-                    document.cookie = "ifArtist=1";
                     location.reload();
                 } else {
                     alert("Ошибка");
