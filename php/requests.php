@@ -218,6 +218,29 @@
             }
             break;
         
+        // case "": //
+        //     $queryText = "INSERT INTO pictures VALUES (
+        //         NULL,
+        //         '',
+        //         '',
+        //         '',
+        //         '',
+        //         '',
+        //         '',
+        //         '',
+        //         ''
+        //     )";
+        //     $query = mysqli_query($link, $queryText);
+        //     break;
+        
+        case "getTypes": //
+            $query = mysqli_query($link, "SELECT * FROM `type`");
+            break;
+
+        case "getStyles": //
+            $query = mysqli_query($link, "SELECT * FROM `style`");
+            break;
+
         default:
             echo json_encode([false], JSON_UNESCAPED_UNICODE);
             break;

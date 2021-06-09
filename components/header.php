@@ -99,22 +99,36 @@
                             <div class="mb-3">
                                 <label for="photoUser" class="form-label">Загрузите картину</label>
                                 <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-                                <input class="form-control form-control-sm" id="photoUser" type="file">
+                                <input class="form-control form-control-sm" id="photoPicture" type="file">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Название картины</label>
                                 <input type="email" class="form-control" placeholder="Введите название картины"
                                     aria-label="Введите название картины" id="pictureName">
                             </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label class="form-label">Тип картины</label>
+                                    <select class="form-select" id="addType" aria-label="Default select example">
+                                        
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">Стиль картины</label>
+                                    <select class="form-select" id="addStyle" aria-label="Default select example">
+                                        
+                                    </select>
+                                </div>
+                            </div>
                             <div class="mb-3">
                                 <label class="form-label">О картине</label>
-                                <textarea class="form-control" placeholder="Расскажите о картине" rows="6" id="describeUser" style="resize: none;"></textarea>
+                                <textarea class="form-control" placeholder="Расскажите о картине" rows="6" id="describePicture" style="resize: none;"></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer" id="modalAddPictureFooter">
-                    <button type="button" class="btn btn-primary">Добавить картину</button>
+                    <button type="button" class="btn btn-primary" id="addPicture">Добавить картину</button>
                 </div>
             </div>
         </div>
