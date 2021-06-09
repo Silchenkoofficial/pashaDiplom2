@@ -26,33 +26,32 @@ const addNewUser = () => {
 
 $(document).ready(() => {
 
-    $('#regBtn').click(function (e) { 
+    $('#regBtn').click(function (e) {
         e.preventDefault();
         let login = $('#loginUser').val();
         let password = $('#passwordUser').val();
         console.log($('#photoUser').val());
-        if (login !== '' && password !== '') {
-            // $.ajax({
-            //     url: "php/requests.php",
-            //     type: "POST",
-            //     data: {
-            //         "requestsType": "reg",
-            //         "queryType": "SELECT",
-            //         "userLogin": login
-            //     },
-            //     success: (data) => {
-            //         data = JSON.parse(data)[0];
-            //         console.log(data);
-            //         if (!data) {
-            //             addNewUser();
-            //         } else {
-            //             alert('Логин уже занят');
-            //         }
-            //     }
-            // });
-        } else {
-            alert('Заполните все поля');
-        }
+
+        if (login == '' && password == '') return alert('Заполните все поля');
+
+        $.ajax({
+            url: "php/requests.php",
+            type: "POST",
+            data: {
+                "requestsType": "reg",
+                "queryType": "SELECT",
+                "userLogin": login
+            },
+            success: (data) => {
+                data = JSON.parse(data)[0];
+                console.log(data);
+                if (!data) {
+                    addNewUser();
+                } else {
+                    alert('Логин уже занят');
+                }
+            }
+        });
 
     });
 

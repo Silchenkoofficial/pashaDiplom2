@@ -1,4 +1,4 @@
-    <footer class="footer">
+    <!-- <footer class="footer">
         <div class="container py-2">
             <div class="row">
                 <div class="col-md-6 offset-md-3 d-flex flex-column align-items-center justify-content-center">
@@ -14,7 +14,7 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> -->
 
 </body>
 </html>

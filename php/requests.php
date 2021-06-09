@@ -7,7 +7,7 @@
 
     switch ($requestType) {
         case 'selectPictures': // Запрос на выборку 10 картин из БД со статусом "Активно"
-            $query = mysqli_query($link, "
+            $queryText = "
                 SELECT
                     `users`.`nameUser`,
                     `users`.`lastnameUser`,
@@ -18,9 +18,14 @@
                     `users`, `pictures`, `artists`
                 WHERE
                     `artists`.`artistID` = `pictures`.`artistID` AND
-                    `users`.`userID` = `artists`.`userID`
-                ORDER BY RAND() LIMIT 8
-            ") or die(mysqli_error($link));
+                    `users`.`userID` = `artists`.`userID` AND
+                    `pictures`.`stateID` = 2
+                ORDER BY RAND()  
+            ";
+            if (!isset($_POST['isGallery'])) {
+                $queryText .= "LIMIT 8";
+            }
+            $query = mysqli_query($link, $queryText) or die(mysqli_error($link));
             break;
 
         case 'selectPictureOnID': // Запрос на выборку определенной картину по ее ID
@@ -112,17 +117,15 @@
                 WHERE userID=$_COOKIE[userID]
             ";
             $query = mysqli_query($link, $queryText);
-            if ($_COOKIE['ifArtist'] == '1' && $query) {
-                $queryText = "
-                    INSERT INTO `artists`
-                    VALUES (
-                        NULL,
-                        `userID` = '$_COOKIE[userID]',
-                        `city` = '$userData[city]',
-                        `describeArtist` = '$userData[describe]'
-                    )
-                ";
-                $query = mysqli_query($link, $queryText);
+            if ($query) {
+                if ($_COOKIE['ifArtist'] == '1') {
+                    $queryText = "
+                        UPDATE `artists`
+                        SET `city` = '$userData[city]', `describeArtist`='$userData[describe]'
+                        WHERE `userID` = $_COOKIE[userID]
+                    ";
+                    $query = mysqli_query($link, $queryText);
+                }
             }
             break;
         
@@ -141,6 +144,21 @@
                     0
                 )
             ");
+            break;
+        
+        case "newArtist": //
+            $userData = $_POST['userNewData'];
+            $query = mysqli_query($link, "
+                INSERT INTO `artists` VALUES (
+                    NULL,
+                    '$userData[userID]',
+                    '$userData[city]',
+                    '$userData[describe]'
+                )
+            ");
+            if ($query) {
+                $query = mysqli_query($link, "UPDATE `users` SET `ifArtist` = 1 WHERE `userID`=$userData[userID]");
+            }
             break;
         
         default:
@@ -163,7 +181,7 @@
         if ($query) {
             echo json_encode([true], JSON_UNESCAPED_UNICODE);
         } else {
-            echo json_encode([false], JSON_UNESCAPED_UNICODE);
+            echo json_encode(['falses'], JSON_UNESCAPED_UNICODE);
         }
         exit();
     }

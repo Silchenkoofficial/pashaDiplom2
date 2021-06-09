@@ -37,7 +37,7 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-    <button class="btn btn-secondary my-4">Перейти в галерею</button>
+    <button class="btn btn-secondary my-4" onclick="location.href = 'gallery.php';">Перейти в галерею</button>
 </div>
 
 <!-- Section with works of artists -->

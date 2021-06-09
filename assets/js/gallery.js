@@ -94,6 +94,7 @@ const loadImages = () => {
         data: {
             "requestsType": "selectPictures",
             "queryType": "SELECT",
+            "isGallery": ""
         },
         success: (data) => {
             data = JSON.parse(data);

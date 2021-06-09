@@ -46,7 +46,7 @@
                     <div class="collapse navbar-collapse" id="navbarScroll">
                         <ul class="navbar-nav m-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                             <li class="nav-item me-2">
-                                <a class="nav-link" href="#">Галерея</a>
+                                <a class="nav-link" href="gallery.php">Галерея</a>
                             </li>
                             <li class="nav-item me-2">
                                 <a class="nav-link" href="#">Авторы</a>
