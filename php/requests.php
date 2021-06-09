@@ -34,6 +34,7 @@
                     `pictures`.`nameP`,
                     `pictures`.`photoP`,
                     `pictures`.`describeP`,
+                    `pictures`.`artistID`,
                     `users`.`nameUser`,
                     `users`.`lastnameUser`,
                     `users`.`photoUser`,
@@ -159,6 +160,54 @@
             if ($query) {
                 $query = mysqli_query($link, "UPDATE `users` SET `ifArtist` = 1 WHERE `userID`=$userData[userID]");
             }
+            break;
+        
+        case "filter": //
+            $optionSelected = $_POST['optionSelected'];
+            $queryText = "SELECT * FROM $optionSelected";
+            $query = mysqli_query($link, $queryText);
+            break;
+        
+        case "filterSecond": //
+            $optionSelected = $_POST['optionSelected'];
+            $optionSecondSelected = $_POST['optionSecondSelected'];
+            $queryText = "
+                SELECT
+                    `users`.`nameUser`,
+                    `users`.`lastnameUser`,
+                    `pictures`.`photoP`,
+                    `pictures`.`nameP`,
+                    `pictures`.`pictureID`
+                FROM
+                    `users`, `pictures`, `artists`
+                WHERE
+                    `artists`.`artistID` = `pictures`.`artistID` AND
+                    `users`.`userID` = `artists`.`userID` AND
+                    `pictures`.`stateID` = 2 AND 
+            ";
+            if ($optionSelected == 'type') {
+                $queryText .= "`pictures`.`typeID` = $optionSecondSelected ORDER BY RAND()";
+            } else if ($optionSelected == 'style') {
+                $queryText .= "`pictures`.`styleID` = $optionSecondSelected ORDER BY RAND()";
+            }
+            $query = mysqli_query($link, $queryText);
+            break;
+
+        case "imageVote": //
+            $dataPost = $_POST['data'];
+            $queryText = "INSERT INTO votes VALUES(
+                NULL,
+                $dataPost[userID],
+                $dataPost[pictureID],
+                '" . date("Y-m-d") . "'
+            )";
+            $query = mysqli_query($link, $queryText);
+
+            $queryText = "UPDATE `pictures` SET `pointsPictures` = `pointsPictures` + 1 WHERE `pictureID` = $dataPost[pictureID])";
+            $query = mysqli_query($link, $queryText);
+
+            $queryText = "UPDATE `artists` SET `pointsArtist` = `pointsArtist` + 1 WHERE `artistID` = $dataPost[pictureID])";
+            $query = mysqli_query($link, $queryText);
             break;
         
         default:

@@ -42,7 +42,7 @@
 
 
 
-<script src="assets/js/lk.js"></script>
+<script src="assets/js/lk.js" type="module"></script>
 <?php include 'components/footer.php';?>
 
 <!-- Modal Update Profile Data -->

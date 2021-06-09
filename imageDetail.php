@@ -37,5 +37,5 @@
     </div>
 </section>
 
-<script src="assets/js/imageDetail.js"></script>
+<script src="assets/js/imageDetail.js" type="module"></script>
 <?php include 'components/footer.php'; ?>

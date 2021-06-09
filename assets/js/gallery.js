@@ -61,6 +61,7 @@ const drawPictures = () => {
     let columnsLength = 0
     let width = $(window).width()
     columnsLength = width < 1000 && width > 700 ? 3 : width < 700 && width > 570 ? 2 : width < 570 ? 1 : 4
+    $('.works__grid').empty()
 
     for (let i = 0; i < columnsLength; i++) {
         let div = document.createElement('div');
@@ -122,4 +123,57 @@ $(document).ready(() => {
         localStorage.setItem("imageID", $(e.target).attr('data-id'))
         location.href = 'imageDetail.php';
     })
+
+    $('#filterType').change((e) => {
+        console.log($(e.target).val());
+        $.ajax({
+            url: 'php/requests.php',
+            type: "POST",
+            data: {
+                "requestsType": "filter",
+                "optionSelected": $(e.target).val(),
+                "queryType": "SELECT"
+            },
+            success: (data) => {
+                data = JSON.parse(data);
+                // console.log(data);
+                $('#filterSecond').empty();
+                data.map((item, i) => {
+                    let out = `<option value="${item[0]}">${item[1]}</option>`;
+                    $('#filterSecond').append(out);
+                })
+                $('#filterBtn').removeAttr("disabled")
+            }
+        })
+    });
+    $('#filterBtn').click((e) => {
+        e.preventDefault();
+        $.ajax({
+            url: 'php/requests.php',
+            type: "POST",
+            data: {
+                "requestsType": "filterSecond",
+                "optionSelected": $('#filterType').val(),
+                "optionSecondSelected": $('#filterSecond').val(),
+                "queryType": "SELECT"
+            },
+            success: (data) => {
+                data = JSON.parse(data);
+                console.log(data);
+                // console.log(images);
+                images.length = 0
+
+                data.map((obj, i) => {
+                    images[i] = {
+                        id: parseInt(obj['pictureID']),
+                        pictureName: obj['nameP'],
+                        imageName: "assets/images/pictures/" + obj['photoP'],
+                        authorName: `${obj['nameUser']} ${obj['lastnameUser']}`
+                    }
+                })
+                // console.log(images);
+                drawPictures();
+            }
+        })
+    });
 });

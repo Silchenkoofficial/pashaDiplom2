@@ -1,3 +1,5 @@
+import get_cookie from './getCookie.js';
+
 const loadingBlock = `
     <style>
         .loading__wrapper {
@@ -81,12 +83,30 @@ $(document).ready(() => {
         success: (data) => {
             data = JSON.parse(data)[0]
             loadPage(data)
+            $('#voteBtn').attr('data-pictureID', localStorage.getItem('imageID'));
+            $('#voteBtn').attr('data-artistID', data['artistID']);
         }
     })
 
     $('#voteBtn').click((e) => {
         e.preventDefault();
-
+        $.ajax({
+            url: 'php/requests.php',
+            type: "POST",
+            data: {
+                "requestsType": "imageVote",
+                "queryType": "INSERT",
+                "data": {
+                    userID: get_cookie('userID'),
+                    pictureID: $(e.target).attr('data-pictureID'),
+                    artistID: $(e.target).attr('data-artistID')
+                }
+            },
+            success: (data) => {
+                data = JSON.parse(data)
+                console.log(data);
+            }
+        })
     })
 
 })
