@@ -34,7 +34,7 @@
                     `pictures`.`nameP`,
                     `pictures`.`photoP`,
                     `pictures`.`describeP`,
-                    `pictures`.`artistID`,
+                    `users`.`userID`,
                     `users`.`nameUser`,
                     `users`.`lastnameUser`,
                     `users`.`photoUser`,
@@ -195,19 +195,25 @@
 
         case "imageVote": //
             $dataPost = $_POST['data'];
-            $queryText = "INSERT INTO votes VALUES(
-                NULL,
-                $dataPost[userID],
-                $dataPost[pictureID],
-                '" . date("Y-m-d") . "'
-            )";
-            $query = mysqli_query($link, $queryText);
-
-            $queryText = "UPDATE `pictures` SET `pointsPictures` = `pointsPictures` + 1 WHERE `pictureID` = $dataPost[pictureID])";
-            $query = mysqli_query($link, $queryText);
-
-            $queryText = "UPDATE `artists` SET `pointsArtist` = `pointsArtist` + 1 WHERE `artistID` = $dataPost[pictureID])";
-            $query = mysqli_query($link, $queryText);
+            $querySelect = mysqli_query($link, "SELECT * FROM votes WHERE userID = $_COOKIE[userID] AND pictureID = $dataPost[pictureID]");
+            if (mysqli_num_rows($querySelect) == 0) {
+                $alreadyVotes = false;
+                $queryText = "INSERT INTO votes VALUES(
+                    NULL,
+                    $dataPost[userID],
+                    $dataPost[pictureID],
+                    '" . date("Y-m-d") . "'
+                )";
+                $query = mysqli_query($link, $queryText);
+    
+                $queryText = "UPDATE `pictures` SET `pointsPictures` = `pointsPictures` + 1 WHERE `pictureID` = $dataPost[pictureID]";
+                $query = mysqli_query($link, $queryText);
+    
+                $queryText = "UPDATE `artists` SET `pointsArtist` = `pointsArtist` + 1 WHERE `userID` = $dataPost[artistID]";
+                $query = mysqli_query($link, $queryText);
+            } else {
+                $alreadyVotes = true;
+            }
             break;
         
         default:
@@ -227,6 +233,10 @@
         exit();
     }
     if ($queryType == "INSERT" || $queryType == "UPDATE" || $queryType == "DELETE") {
+        if ($alreadyVotes) {
+            echo json_encode(['Вы уже проголосовали'], JSON_UNESCAPED_UNICODE);
+            exit();
+        }
         if ($query) {
             echo json_encode([true], JSON_UNESCAPED_UNICODE);
         } else {

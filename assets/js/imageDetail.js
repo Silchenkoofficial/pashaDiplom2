@@ -84,7 +84,7 @@ $(document).ready(() => {
             data = JSON.parse(data)[0]
             loadPage(data)
             $('#voteBtn').attr('data-pictureID', localStorage.getItem('imageID'));
-            $('#voteBtn').attr('data-artistID', data['artistID']);
+            $('#voteBtn').attr('data-artistID', data['userID']);
         }
     })
 
@@ -103,8 +103,10 @@ $(document).ready(() => {
                 }
             },
             success: (data) => {
-                data = JSON.parse(data)
-                console.log(data);
+                data = JSON.parse(data)[0]
+                if (!data) return alert("Произошла ошибка! Попробуйте еще раз");
+                if (data == 'Вы уже проголосовали') return alert("Вы уже проголосовали за эту картину")
+                alert("Ваш голос учтен");
             }
         })
     })
