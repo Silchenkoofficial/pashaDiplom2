@@ -90,25 +90,27 @@ $(document).ready(() => {
 
     $('#voteBtn').click((e) => {
         e.preventDefault();
-        $.ajax({
-            url: 'php/requests.php',
-            type: "POST",
-            data: {
-                "requestsType": "imageVote",
-                "queryType": "INSERT",
-                "data": {
-                    userID: get_cookie('userID'),
-                    pictureID: $(e.target).attr('data-pictureID'),
-                    artistID: $(e.target).attr('data-artistID')
+        if (get_cookie('auth') == '1') {
+            $.ajax({
+                url: 'php/requests.php',
+                type: "POST",
+                data: {
+                    "requestsType": "imageVote",
+                    "queryType": "INSERT",
+                    "data": {
+                        userID: get_cookie('userID'),
+                        pictureID: $(e.target).attr('data-pictureID'),
+                        artistID: $(e.target).attr('data-artistID')
+                    }
+                },
+                success: (data) => {
+                    data = JSON.parse(data)[0]
+                    if (!data) return alert("Произошла ошибка! Попробуйте еще раз");
+                    if (data == 'Вы уже проголосовали') return alert("Вы уже проголосовали за эту картину")
+                    alert("Ваш голос учтен");
                 }
-            },
-            success: (data) => {
-                data = JSON.parse(data)[0]
-                if (!data) return alert("Произошла ошибка! Попробуйте еще раз");
-                if (data == 'Вы уже проголосовали') return alert("Вы уже проголосовали за эту картину")
-                alert("Ваш голос учтен");
-            }
-        })
+            })
+        } else return alert('Для голосования необходимо авторизоваться!');
     })
 
 })

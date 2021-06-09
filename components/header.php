@@ -72,11 +72,30 @@
                                 Войти в систему
                             </a>
                             <?php } ?>
-                            <button class="btn btn-primary" type="submit"><i class="fas fa-plus"></i> Добавить
-                                работу</button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#modalAddPicture">
+                                <i class="fas fa-plus"></i> Добавить
+                                работу
+                            </button>
                         </form>
                     </div>
                 </div>
             </nav>
         </header>
+    </div>
+
+    <!-- Modal Add Pictures -->
+    <div class="modal fade" id="modalAddPicture" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Добавление картины</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Добавить картину</button>
+                </div>
+            </div>
+        </div>
     </div>

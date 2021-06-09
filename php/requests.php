@@ -205,12 +205,13 @@
                     '" . date("Y-m-d") . "'
                 )";
                 $query = mysqli_query($link, $queryText);
-    
+
                 $queryText = "UPDATE `pictures` SET `pointsPictures` = `pointsPictures` + 1 WHERE `pictureID` = $dataPost[pictureID]";
                 $query = mysqli_query($link, $queryText);
     
                 $queryText = "UPDATE `artists` SET `pointsArtist` = `pointsArtist` + 1 WHERE `userID` = $dataPost[artistID]";
                 $query = mysqli_query($link, $queryText);
+    
             } else {
                 $alreadyVotes = true;
             }
